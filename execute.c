@@ -14,6 +14,10 @@ char *argv[2];
 (void)num_tokens;
 argv[0] = tokens[0];
 argv[1] = NULL;
+if (num_tokens == 2)
+{
+argv[0] = "ls";
+}
 pid = fork();
 if (pid == -1)
 {
