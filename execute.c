@@ -3,6 +3,7 @@
  * execute_me - execute the commands
  * @tokens: the tokinezed string hold the command from std input
  * @dot: carry the name of the bash
+ * @num_tokens: number of tokens
  * Return: void no return
  */
 void execute_me(char **tokens, char *dot, int num_tokens)
