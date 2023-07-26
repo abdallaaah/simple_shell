@@ -27,7 +27,7 @@ exit(EXIT_FAILURE);
 }
 else if (pid == 0)
 {
-ind = execve(argv[0], argv, env);
+ind = execve(argv[0], argv, NULL);
 if (ind == -1)
 {
 perror(dot);
