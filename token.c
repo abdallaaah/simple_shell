@@ -13,7 +13,7 @@ tokens = (char **) malloc(sizeof(char *) * MAX_BUFFER_SIZE);
 token = strtok(buffer_line, " \t\n");
 while (token != NULL)
 {
-tokens[num_tokens] = (char *) malloc(sizeof(char) * (strlen(token) + 1));
+tokens[num_tokens] = (char *) malloc(sizeof(char) * (strlen(token)) + 1);
 _strcpy(tokens[num_tokens], token);
 num_tokens++;
 token = strtok(NULL, " \t\n");
