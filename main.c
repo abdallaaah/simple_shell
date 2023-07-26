@@ -6,28 +6,32 @@
  * Return: Always 0
  */
 int flag = 0;
+char *buffer_line = NULL;
 void sigint_handler(int sig)
 {
 (void)sig;
 flag = 1;
-printf("hello");
+signal(SIGINT, sigint_handler);
+if (buffer_line != NULL)
+{
+free(buffer_line);
+buffer_line = NULL;
+}
+write(STDOUT_FILENO, "\n", 1);
+exit(EXIT_SUCCESS);
 }
 int main(int argc, char *argv[])
 {
-char *buffer_line = NULL;
+/*char *buffer_line = NULL;*/
 size_t buffer_len = 0;
 char **tokens = NULL;
 char *prompt = "#cisfun$ ";
 ssize_t num;
 int num_tokens;
 (void)argc, (void)argv;
+signal(SIGINT, sigint_handler);
 while (1)
 {
-/*if(signal(SIGINT, sigint_handler) && flag == 1)
-{
-flag = 0;
-continue;
-}*/
 if (isatty(STDIN_FILENO))
 write(STDOUT_FILENO, prompt, strlen(prompt));
 num = getline(&buffer_line, &buffer_len, stdin);
@@ -51,10 +55,6 @@ tokens = tokenize_buffer(buffer_line);
 num_tokens = 0;
 while (tokens[num_tokens] != NULL)
 num_tokens++;
-if(signal(SIGINT, sigint_handler))
-{
-/*printf("hellllllllo\n");*/
-}
 if (_strcmp(tokens[0], "exit") == 0)
 {
 free_tokens(tokens, num_tokens);
