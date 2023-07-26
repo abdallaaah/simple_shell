@@ -13,5 +13,6 @@
 char **tokenize_buffer(char *buffer_line);
 char *_strcpy(char *dest, const char *src);
 void execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line);
-void sigint_handler(int sig);
+void free_tokens(char **tokens, int num_tokens);
+int _strcmp(const char *string1, const char *string2);
 #endif

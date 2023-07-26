@@ -10,6 +10,7 @@ void sigint_handler(int sig)
 {
 (void)sig;
 flag = 1;
+printf("hello");
 }
 int main(int argc, char *argv[])
 {
@@ -18,27 +19,26 @@ size_t buffer_len = 0;
 char **tokens = NULL;
 char *prompt = "#cisfun$ ";
 ssize_t num;
-int i, num_tokens;
+int num_tokens;
 (void)argc, (void)argv;
 while (1)
 {
-if(signal(SIGINT, sigint_handler) && flag == 1)
+/*if(signal(SIGINT, sigint_handler) && flag == 1)
 {
-break;
-}
+flag = 0;
+continue;
+}*/
 if (isatty(STDIN_FILENO))
 write(STDOUT_FILENO, prompt, strlen(prompt));
 num = getline(&buffer_line, &buffer_len, stdin);
 if (num == -1)
 {
-/*if (flag)
+if (errno ==  EINTR)
 {
-flag = 0;
-break;
-}*/
+continue;
+}
 if (EOF)
 {
-/*free(buffer_line);*/
 break;
 }
 else
@@ -51,25 +51,22 @@ tokens = tokenize_buffer(buffer_line);
 num_tokens = 0;
 while (tokens[num_tokens] != NULL)
 num_tokens++;
-if (strcmp(tokens[0], "exit") == 0)
+if(signal(SIGINT, sigint_handler))
 {
-for (i = 0; i < num_tokens; i++)
-{
-free(tokens[i]);
+/*printf("hellllllllo\n");*/
 }
-free(tokens);
+if (_strcmp(tokens[0], "exit") == 0)
+{
+free_tokens(tokens, num_tokens);
+tokens = NULL;
 free(buffer_line);
 buffer_line = NULL;
-tokens = NULL;
 exit(EXIT_SUCCESS);
 }
 if (flag != 1)
 execute_me(tokens, argv[0], num_tokens, buffer_line);
-for (i = 0; i < num_tokens; i++)
-{
-free(tokens[i]);
-}
-free(tokens);
+free_tokens(tokens, num_tokens);
+tokens = NULL;
 }
 free(buffer_line);
 buffer_line = NULL;
