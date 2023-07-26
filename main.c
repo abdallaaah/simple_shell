@@ -51,6 +51,18 @@ tokens = tokenize_buffer(buffer_line);
 num_tokens = 0;
 while (tokens[num_tokens] != NULL)
 num_tokens++;
+if (strcmp(tokens[0], "exit") == 0)
+{
+for (i = 0; i < num_tokens; i++)
+{
+free(tokens[i]);
+}
+free(tokens);
+free(buffer_line);
+buffer_line = NULL;
+tokens = NULL;
+exit(EXIT_SUCCESS);
+}
 if (flag != 1)
 execute_me(tokens, argv[0], num_tokens, buffer_line);
 for (i = 0; i < num_tokens; i++)
