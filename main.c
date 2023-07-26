@@ -20,10 +20,6 @@ char *prompt = "#cisfun$ ";
 ssize_t num;
 int i, num_tokens;
 (void)argc, (void)argv;
-/*if(signal(SIGINT, sigint_handler))
-{
-
-}*/
 while (1)
 {
 if(signal(SIGINT, sigint_handler) && flag == 1)
@@ -37,9 +33,7 @@ if (num == -1)
 {
 if (flag)
 {
-printf("\nCtrl+C was pressed\n");
 flag = 0;
-/*free(buffer_line);*/
 break;
 }
 else if (EOF)
