@@ -10,7 +10,7 @@ char *_strcpy(char *dest, const char *src)
 char *pp = dest;
 while (*src)
 {
-*p++ = *src++;
+*pp++ = *src++;
 }
 *pp = '\0';
 return (dest);
