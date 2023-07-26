@@ -7,11 +7,11 @@
  */
 char *_strcpy(char *dest, const char *src)
 {
-char *p = dest;
+char *pp = dest;
 while (*src)
 {
 *p++ = *src++;
 }
-*p = '\0';
+*pp = '\0';
 return (dest);
 }
