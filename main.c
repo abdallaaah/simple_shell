@@ -5,12 +5,12 @@
  * @argv: the argumnets will enter
  * Return: Always 0
  */
-/*int flag = 0;
+int flag = 0;
 void sigint_handler(int sig)
 {
 (void)sig;
 flag = 1;
-}*/
+}
 int main(int argc, char *argv[])
 {
 char *buffer_line = NULL;
@@ -22,10 +22,10 @@ int i, num_tokens;
 (void)argc, (void)argv;
 while (1)
 {
-/*if(signal(SIGINT, sigint_handler) && flag == 1)
+if(signal(SIGINT, sigint_handler) && flag == 1)
 {
 break;
-}*/
+}
 if (isatty(STDIN_FILENO))
 write(STDOUT_FILENO, prompt, strlen(prompt));
 num = getline(&buffer_line, &buffer_len, stdin);
