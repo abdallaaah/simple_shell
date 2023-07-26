@@ -7,6 +7,7 @@
  */
 int flag = 0;
 char *buffer_line = NULL;
+extern char **environ;
 void sigint_handler(int sig)
 {
 (void)sig;
@@ -28,6 +29,7 @@ char **tokens = NULL;
 char *prompt = "#cisfun$ ";
 ssize_t num;
 int num_tokens;
+char **env;
 (void)argc, (void)argv;
 signal(SIGINT, sigint_handler);
 while (1)
@@ -63,7 +65,16 @@ free(buffer_line);
 buffer_line = NULL;
 exit(EXIT_SUCCESS);
 }
-if (flag != 1)
+else if (_strcmp(tokens[0], "env") == 0)
+        {
+           
+            for (env = environ; *env != NULL; env++)
+            {
+                write(STDOUT_FILENO, *env, strlen(*env));
+                write(STDOUT_FILENO, "\n", 1);
+            }
+        }
+else if (flag != 1)
 execute_me(tokens, argv[0], num_tokens, buffer_line);
 free_tokens(tokens, num_tokens);
 tokens = NULL;
