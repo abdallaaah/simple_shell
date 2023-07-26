@@ -5,7 +5,7 @@
  * @argv: the argumnets will enter
  * Return: Always 0
  */
-volatile sig_atomic_t flag = 0;
+int flag = 0;
 void sigint_handler(int sig)
 {
 (void)sig;
