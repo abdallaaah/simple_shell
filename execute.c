@@ -11,11 +11,11 @@ void execute_me(char **tokens, char *dot, int num_tokens)
 pid_t pid;
 int ind;
 char *argv[2];
-char *env[] = {
+/*char *env[] = {
 "HOME=/root",
 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
 NULL
-};
+};*/
 (void)num_tokens;
 argv[0] = tokens[0];
 argv[1] = NULL;
