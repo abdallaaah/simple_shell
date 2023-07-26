@@ -38,7 +38,7 @@ break;
 }*/
 if (EOF)
 {
-free(buffer_line);
+/*free(buffer_line);*/
 break;
 }
 else
