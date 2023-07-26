@@ -31,12 +31,12 @@ write(STDOUT_FILENO, prompt, strlen(prompt));
 num = getline(&buffer_line, &buffer_len, stdin);
 if (num == -1)
 {
-if (flag)
+/*if (flag)
 {
 flag = 0;
 break;
-}
-else if (EOF)
+}*/
+if (EOF)
 {
 free(buffer_line);
 break;
