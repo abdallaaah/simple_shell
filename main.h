@@ -13,5 +13,5 @@
 char **tokenize_buffer(char *buffer_line);
 char *_strcpy(char *dest, const char *src);
 void execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line);
-
+void sigint_handler(int sig);
 #endif
