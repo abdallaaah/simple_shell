@@ -13,5 +13,6 @@ free(tokens[i]);
 i++;
 }
 free(tokens);
+tokens = NULL;
 return;
 }
