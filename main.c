@@ -1,11 +1,9 @@
 #include "main.h"
-
-int flag = 0;
-
+/*int flag = 0;*/
 void sigint_handler(int sig)
 {
 (void)sig;
-    flag = 1;
+    /*flag = 1;*/
     write(STDOUT_FILENO, "\n", 1);
     exit(EXIT_FAILURE);
 }

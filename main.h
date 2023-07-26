@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
-
+#define flag 0
 #define MAX_BUFFER_SIZE 1024
 char **tokenize_buffer(char *buffer_line);
 char *_strcpy(char *dest, const char *src);
