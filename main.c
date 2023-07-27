@@ -53,13 +53,37 @@ tokens = tokenize_buffer(buffer_line);
 num_tokens = 0;
 while (tokens[num_tokens] != NULL)
 num_tokens++;
-if (_strcmp(tokens[0], "exit") == 0)
+/*if (_strcmp(tokens[0], "exit") == 0)
 {
 free_tokens(tokens, num_tokens);
 tokens = NULL;
 free(buffer_line);
 buffer_line = NULL;
 exit(EXIT_SUCCESS);
+}*/
+if (_strcmp(tokens[0], "exit") == 0)
+{
+    if (num_tokens > 2)
+    {
+        write(STDOUT_FILENO, "Usage: exit [status]\n", strlen("Usage: exit [status]\n"));
+    }
+    else if (num_tokens == 2)
+    {
+        int status = atoi(tokens[1]);
+        free_tokens(tokens, num_tokens);
+        tokens = NULL;
+        free(buffer_line);
+        buffer_line = NULL;
+        exit(status);
+    }
+    else
+    {
+        free_tokens(tokens, num_tokens);
+        tokens = NULL;
+        free(buffer_line);
+        buffer_line = NULL;
+        exit(EXIT_SUCCESS);
+    }
 }
 else if (_strcmp(tokens[0], "env") == 0)
 {
