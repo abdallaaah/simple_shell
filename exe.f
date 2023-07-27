@@ -3,6 +3,7 @@ void execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line)
 {
     pid_t pid;
     int ret;
+    (void)num_tokens;
     (void)dot;
 
     if (access(tokens[0], X_OK) == -1)
@@ -23,7 +24,7 @@ void execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line)
     }
     else if (pid == 0)
     {
-        ret = execve(tokens[0], tokens, environ);
+        ret = execve(tokens[0], tokens, NULL);
         if (ret == -1)
         {
             perror("execve error");
@@ -31,6 +32,7 @@ void execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line)
             free(buffer_line);
             exit(EXIT_FAILURE);
         }
+        
     }
     else
     {
