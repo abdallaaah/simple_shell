@@ -70,7 +70,7 @@ else
 {
 free_tokens(tokens, num_tokens);
 tokens = NULL;
-exit_status(2);
+exit_status(0);
 }
 }
 else if (_strcmp(tokens[0], "env") == 0)
