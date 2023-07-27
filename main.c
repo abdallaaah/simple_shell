@@ -27,7 +27,7 @@ size_t buffer_len = 0;
 char **tokens = NULL;
 char *prompt = "#cisfun$ ";
 ssize_t num;
-int num_tokens;
+int num_tokens , status;
 (void)argc, (void)argv;
 signal(SIGINT, sigint_handler);
 while (1)
@@ -53,37 +53,25 @@ tokens = tokenize_buffer(buffer_line);
 num_tokens = 0;
 while (tokens[num_tokens] != NULL)
 num_tokens++;
-/*if (_strcmp(tokens[0], "exit") == 0)
+if (_strcmp(tokens[0], "exit") == 0)
+{
+if (num_tokens > 2)
+{
+write(STDOUT_FILENO, "Usage: exit [status]\n", strlen("Usage: exit [status]\n"));
+}
+else if (num_tokens == 2)
+{
+status = atoi(tokens[1]);
+free_tokens(tokens, num_tokens);
+tokens = NULL;
+exit_status(status);
+}
+else
 {
 free_tokens(tokens, num_tokens);
 tokens = NULL;
-free(buffer_line);
-buffer_line = NULL;
-exit(EXIT_SUCCESS);
-}*/
-if (_strcmp(tokens[0], "exit") == 0)
-{
-    if (num_tokens > 2)
-    {
-        write(STDOUT_FILENO, "Usage: exit [status]\n", strlen("Usage: exit [status]\n"));
-    }
-    else if (num_tokens == 2)
-    {
-        int status = atoi(tokens[1]);
-        free_tokens(tokens, num_tokens);
-        tokens = NULL;
-        free(buffer_line);
-        buffer_line = NULL;
-        exit(status);
-    }
-    else
-    {
-        free_tokens(tokens, num_tokens);
-        tokens = NULL;
-        free(buffer_line);
-        buffer_line = NULL;
-        exit(EXIT_SUCCESS);
-    }
+exit_status(EXIT_SUCCESS);
+}
 }
 else if (_strcmp(tokens[0], "env") == 0)
 {
