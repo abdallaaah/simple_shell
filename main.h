@@ -16,4 +16,5 @@ void execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line);
 void free_tokens(char **tokens, int num_tokens);
 int _strcmp(const char *string1, const char *string2);
 void write_env();
+char *_strtok(char *str, const char *delim, char **last);
 #endif
