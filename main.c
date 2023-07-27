@@ -27,7 +27,7 @@ size_t buffer_len = 0;
 char **tokens = NULL;
 char *prompt = "#cisfun$ ";
 ssize_t num;
-int num_tokens , status;
+int num_tokens , status, exit_flag = 0;
 (void)argc, (void)argv;
 signal(SIGINT, sigint_handler);
 while (1)
@@ -70,7 +70,14 @@ else
 {
 free_tokens(tokens, num_tokens);
 tokens = NULL;
+if (exit_flag == 1)
+{
+exit_status(2);
+}
+else
+{
 exit_status(0);
+}
 }
 }
 else if (_strcmp(tokens[0], "env") == 0)
@@ -78,7 +85,7 @@ else if (_strcmp(tokens[0], "env") == 0)
 write_env();
 }
 else if (flag != 1)
-execute_me(tokens, argv[0], num_tokens, buffer_line);
+exit_flag = execute_me(tokens, argv[0], num_tokens, buffer_line);
 free_tokens(tokens, num_tokens);
 tokens = NULL;
 }

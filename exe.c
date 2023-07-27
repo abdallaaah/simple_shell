@@ -7,13 +7,14 @@
  * @buffer_line: the buffer line
  * Return: depend on fork and many things
  */
-void execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line)
+int execute_me(char **tokens, char *dot, int num_tokens, char *buffer_line)
 {
+
 pid_t pid;
-int ret;
+int ret, exit_flag = 0;
 char *path_env, *dir;
 char path[BUFSIZ], error_message[BUFSIZ];
-(void)num_tokens, (void)dot;
+(void)num_tokens, (void)dot, (void)exit_flag;
 if (access(tokens[0], X_OK) == -1)
 {
 path_env = getenv("PATH");
@@ -30,9 +31,10 @@ dir = strtok(NULL, ":");
 }
 if (access(tokens[0], X_OK) == -1)
 {
+exit_flag = 1;
 snprintf(error_message, BUFSIZ, "%s: %d: %s: not found\n", dot, 1, tokens[0]);
 write(STDOUT_FILENO, error_message, strlen(error_message));
-return;
+/*return;*/
 }
 }
 pid = fork();
@@ -58,4 +60,5 @@ else
 {
 wait(NULL);
 }
+return (exit_flag);
 }
