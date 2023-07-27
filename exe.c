@@ -37,6 +37,10 @@ write(STDOUT_FILENO, error_message, strlen(error_message));
 /*return;*/
 }
 }
+else
+{
+exit_flag = 1;
+}
 pid = fork();
 if (pid == -1)
 {
