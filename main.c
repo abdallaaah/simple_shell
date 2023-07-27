@@ -22,13 +22,13 @@ exit(EXIT_SUCCESS);
 }
 int main(int argc, char *argv[])
 {
-/*char *buffer_line = NULL;*/
+int pipe_line = 0;
 size_t buffer_len = 0;
 char **tokens = NULL;
 char *prompt = "#cisfun$ ";
 ssize_t num;
 int num_tokens , status, exit_flag = 0;
-(void)argc, (void)argv;
+(void)argc, (void)argv, (void)pipe_line;
 signal(SIGINT, sigint_handler);
 while (1)
 {
@@ -42,12 +42,18 @@ if (errno ==  EINTR)
 continue;
 }
 if (EOF)
+{
 break;
+}
 else
 {
 perror("Error in getline()"), exit(EXIT_FAILURE);
 continue;
 }
+}
+if (strspn(buffer_line, " \t\r\n") == strlen(buffer_line))
+{
+exit_status(0);
 }
 tokens = tokenize_buffer(buffer_line);
 num_tokens = 0;
@@ -70,6 +76,7 @@ else
 {
 free_tokens(tokens, num_tokens);
 tokens = NULL;
+/*free(buffer_line);*/
 if (exit_flag == 1)
 {
 exit_status(2);

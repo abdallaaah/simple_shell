@@ -32,6 +32,7 @@ dir = strtok(NULL, ":");
 if (access(tokens[0], X_OK) == -1)
 {
 exit_flag = 1;
+/*free_tokens(tokens, num_tokens);*/
 snprintf(error_message, BUFSIZ, "%s: %d: %s: not found\n", dot, 1, tokens[0]);
 write(STDOUT_FILENO, error_message, strlen(error_message));
 /*return;*/
